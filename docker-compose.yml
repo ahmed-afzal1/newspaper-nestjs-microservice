@@ -1,0 +1,57 @@
+version: '3.9'
+
+services:
+  post:
+    build:
+      context: .
+      dockerfile: ./apps/post/Dockerfile
+      target: development
+    command: npm run start:dev post
+    env_file:
+      - ./apps/post/.env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/src/app
+
+  generalsetting:
+    build:
+      context: .
+      dockerfile: ./apps/generalsetting/Dockerfile
+      target: development
+    command: npm run start:dev generalsetting
+    env_file:
+      - ./apps/generalsetting/.env
+    ports:
+      - '3003:3003'
+  postgress:
+    image: postgres:16.0-alpine3.18
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=newspaper
+    ports:
+      - "5432:5432"
+
+
+  pg-admin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - "5050:5050"
