@@ -2,6 +2,10 @@
 /dist
 /node_modules
 
+# volumes
+/data/db/
+/data/pgadmin-data/
+
 # Logs
 logs
 *.log
