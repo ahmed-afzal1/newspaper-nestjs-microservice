@@ -4,10 +4,12 @@ import { PostService } from './post.service';
 import { DatabaseModule, LoggerModule } from '@app/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { Post } from './entity/post.entity';
 
 @Module({
   imports: [
     DatabaseModule,
+    DatabaseModule.forFeature([Post]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,

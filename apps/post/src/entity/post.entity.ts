@@ -1,4 +1,3 @@
-// import { AbstractEntity } from '@app/common';
 import {
   Column,
   CreateDateColumn,
@@ -8,24 +7,12 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Admin {
+export class Post {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 100, default: null })
-  name: string;
-
-  @Column({ type: 'varchar', length: 100, default: null })
-  email: string;
-
-  @Column({ type: 'varchar', length: 100, default: null })
-  password: string;
-
-  @Column({ type: 'varchar', length: 255, default: null })
-  photo: string;
-
-  @Column({ type: 'boolean', default: 1 })
-  status: boolean;
+  title: string;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;
