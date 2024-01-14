@@ -27,4 +27,4 @@ RUN npm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD [ "node", "dist/apps/post/main.js" ]
+CMD [ "node", "dist/apps/post/main" ]
