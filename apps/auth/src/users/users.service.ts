@@ -4,10 +4,10 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { Admin } from './entity/admin.entity';
 import * as bcrypt from 'bcryptjs';
 import { UsersRepository } from './users.repository';
 import { getUserDto } from './dto/get-user.dto';
+import { Admin } from '@app/common';
 
 @Injectable()
 export class UsersService {

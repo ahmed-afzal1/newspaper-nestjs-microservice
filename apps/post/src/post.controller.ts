@@ -1,18 +1,20 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
-import { CreatePostDto } from './dto/create-post.dto';
+import { CreateArticlePostDto } from './dto/create-article-post.dto';
+import { JwtAuthGuard } from '@app/common';
 
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Get()
+  @Get('article')
+  @UseGuards(JwtAuthGuard)
   async index() {
-    return 'post';
+    return 'posttt';
   }
 
   @Post('article/store')
-  async store(@Body() createPostDto: CreatePostDto) {
-    return await this.postService.createPost(createPostDto);
+  async store(@Body() createArticlePostDto: CreateArticlePostDto) {
+    return await this.postService.createPost(createArticlePostDto);
   }
 }

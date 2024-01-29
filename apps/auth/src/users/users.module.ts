@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { Admin } from './entity/admin.entity';
 import { UsersRepository } from './users.repository';
-import { DatabaseModule } from '@app/common';
+import { Admin, DatabaseModule } from '@app/common';
 
 @Module({
   imports: [DatabaseModule, DatabaseModule.forFeature([Admin])],

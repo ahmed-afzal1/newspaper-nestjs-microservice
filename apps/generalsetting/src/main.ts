@@ -3,10 +3,12 @@ import { GeneralsettingModule } from './generalsetting.module';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(GeneralsettingModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useLogger(app.get(Logger));
 
   const config = new DocumentBuilder()
     .setTitle('Generalsetting Service API')

@@ -17,9 +17,22 @@ services:
     volumes:
       - .:/usr/src/app
     restart: always
-    depends_on:
-      - postgres
-
+  category:
+    build:
+      context: .
+      dockerfile: ./apps/category/Dockerfile
+      target: development
+    command: npm run start:dev category
+    env_file:
+      - ./apps/category/.env
+    ports:
+      - '3004:3004'
+    networks:
+      newspaper_net:
+        ipv4_address: 192.168.0.7
+    volumes:
+      - .:/usr/src/app
+    restart: always
   auth:
     build:
       context: .
@@ -36,8 +49,6 @@ services:
     volumes:
       - .:/usr/src/app
     restart: always
-    depends_on:
-      - postgres
 
   generalsetting:
     build:
@@ -55,8 +66,6 @@ services:
     volumes:
       - .:/usr/src/app
     restart: always
-    depends_on:
-      - postgres
 
   postgres:
     image: postgres:16.0-alpine3.18

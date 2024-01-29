@@ -1,4 +1,3 @@
-// import { AbstractEntity } from '@app/common';
 import {
   Column,
   CreateDateColumn,

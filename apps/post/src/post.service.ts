@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from './entity/post.entity';
 import { EntityManager, Repository } from 'typeorm';
-import { CreatePostDto } from './dto/create-post.dto';
+import { CreateArticlePostDto } from './dto/create-article-post.dto';
 
 @Injectable()
 export class PostService {
@@ -12,9 +12,10 @@ export class PostService {
     private readonly entityManager: EntityManager,
   ) {}
 
-  async createPost(createPostDto: CreatePostDto) {
-    const post = new Post();
-    post.title = createPostDto.title;
-    return await this.entityManager.save(post);
+  async createPost(createArticlePostDto: CreateArticlePostDto) {
+    return createArticlePostDto;
+    // const post = new Post();
+    // post.title = createPostDto.title;
+    // return await this.entityManager.save(post);
   }
 }
