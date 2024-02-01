@@ -17,22 +17,6 @@ services:
     volumes:
       - .:/usr/src/app
     restart: always
-  category:
-    build:
-      context: .
-      dockerfile: ./apps/category/Dockerfile
-      target: development
-    command: npm run start:dev category
-    env_file:
-      - ./apps/category/.env
-    ports:
-      - '3004:3004'
-    networks:
-      newspaper_net:
-        ipv4_address: 192.168.0.7
-    volumes:
-      - .:/usr/src/app
-    restart: always
   auth:
     build:
       context: .

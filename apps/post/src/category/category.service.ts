@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CategoryRepository } from './category.repository';
-import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './entity/category.entity';
+import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
@@ -19,6 +19,10 @@ export class CategoryService {
   }
 
   async edit(id: string) {
+    return this.categoryRepository.findOne({ id: Number(id) });
+  }
+
+  async find(id: number): Promise<Category> {
     return this.categoryRepository.findOne({ id: Number(id) });
   }
 

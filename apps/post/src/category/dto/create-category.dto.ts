@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCategoryDto {
   @IsNotEmpty()
@@ -13,9 +14,11 @@ export class CreateCategoryDto {
   @IsString()
   color: string;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   show_at_homepage: number;
 
-  @IsNumber()
+  @IsInt()
+  @Type(() => Number)
   show_on_menu: number;
 }

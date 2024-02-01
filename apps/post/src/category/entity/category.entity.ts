@@ -1,5 +1,12 @@
 import { AbstractEntity } from '@app/common';
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Post } from '../../entity/post.entity';
 
 @Entity()
 export class Category extends AbstractEntity<Category> {
@@ -23,4 +30,7 @@ export class Category extends AbstractEntity<Category> {
 
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
+
+  @OneToMany(() => Post, (post) => post.category)
+  posts: Post[];
 }

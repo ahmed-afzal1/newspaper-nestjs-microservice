@@ -1,28 +1,16 @@
 import { Module } from '@nestjs/common';
-import { CategoryController } from './category.controller';
 import { CategoryService } from './category.service';
-import { AUTH_SERVICE, DatabaseModule, LoggerModule } from '@app/common';
-import { Category } from './entity/category.entity';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from 'joi';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { CategoryController } from './category.controller';
 import { CategoryRepository } from './category.repository';
+import { AUTH_SERVICE, DatabaseModule } from '@app/common';
+import { Category } from './entity/category.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     DatabaseModule,
     DatabaseModule.forFeature([Category]),
-    LoggerModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-      validationSchema: Joi.object({
-        DB_HOST: Joi.string().required(),
-        DB_PORT: Joi.number().required(),
-        DB_NAME: Joi.string().required(),
-        DB_USERNAME: Joi.string().required(),
-        DB_PASSWORD: Joi.string().required(),
-      }),
-    }),
     ClientsModule.registerAsync([
       {
         name: AUTH_SERVICE,
@@ -37,7 +25,8 @@ import { CategoryRepository } from './category.repository';
       },
     ]),
   ],
-  controllers: [CategoryController],
+  exports: [CategoryService],
   providers: [CategoryService, CategoryRepository],
+  controllers: [CategoryController],
 })
 export class CategoryModule {}

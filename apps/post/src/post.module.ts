@@ -6,11 +6,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { Post } from './entity/post.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { CategoryModule } from './category/category.module';
+import { PostRepository } from './post.repository';
 
 @Module({
   imports: [
     DatabaseModule,
     DatabaseModule.forFeature([Post]),
+    CategoryModule,
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -35,8 +38,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         inject: [ConfigService],
       },
     ]),
+    CategoryModule,
   ],
   controllers: [PostController],
-  providers: [PostService],
+  providers: [PostService, PostRepository],
 })
 export class PostModule {}
