@@ -18,7 +18,7 @@ export class GeneralsettingController {
 
   @Get()
   async index() {
-    return 'okk';
+    return 'ok';
   }
 
   @Put('content/update')

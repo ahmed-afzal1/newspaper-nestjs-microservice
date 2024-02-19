@@ -51,6 +51,23 @@ services:
       - .:/usr/src/app
     restart: always
 
+  notification:
+    build:
+      context: .
+      dockerfile: ./apps/notification/Dockerfile
+      target: development
+    command: npm run start:dev notification
+    env_file:
+      - ./apps/notification/.env
+    ports:
+      - '3004:3004'
+    networks:
+      newspaper_net:
+        ipv4_address: 192.168.0.7
+    volumes:
+      - .:/usr/src/app
+    restart: always
+
   postgres:
     image: postgres:16.0-alpine3.18
     volumes:
